@@ -5,12 +5,17 @@ import { TextInputMask } from 'react-native-masked-text';
 
 export const Container = styled(View)`
     flex: 1;
-    padding: 0 36px;
-    padding-top: 10%;
-    padding-bottom: 20px;
     align-items: flex-start;
     justify-content: space-between;
     background-color: #FFFFFF;
+`
+export const Content = styled(View)`
+    height: 100%;
+    width: 100%;
+    padding: 0 36px;
+    padding-top: 10%;
+    padding-bottom: 5%;
+    justify-content: space-between;
 `
 
 export const RegularText = styled(Text)` 

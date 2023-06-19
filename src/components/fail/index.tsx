@@ -1,47 +1,56 @@
-import React, { useState } from "react";
-import { Image, Modal, Text, TouchableOpacity, View } from "react-native";
-import { Button, Container, ModalBox, ModalContent, Subtitle, TextButton, Title } from "./styles";
+import React, {SetStateAction, useState} from 'react';
+import {Image, Modal, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Button,
+  Container,
+  ModalBox,
+  ModalContent,
+  Subtitle,
+  TextButton,
+  Title,
+} from './styles';
 
-const ErrorModal = (TitleProps: string | undefined, Sub: string | undefined)=>{
-
-    TitleProps = "Titulo do Erro";
-    Sub = "Mensagem do erro";
-
-    const [isVisible, setIsVisible] = useState(true);
-
-    const handleCloseModal = () => {
-        setIsVisible(false);
-    };
-
-    if (!isVisible) {
-        return null; // Return null when isVisible state is false to hide the modal
-    }
-
-    return(
-        <Container>
-        
-            <ModalContent>
-                <Button onPress={handleCloseModal}>
-                    <TextButton>X Fechar</TextButton>
-                </Button>
-            
-                <ModalBox>
-                    <Image
-                        source={require('../../../assets/error.png')}
-                        style={{
-                            height: 52,
-                            width: 52,
-                        }}
-                    />
-
-                    <Title>{TitleProps}</Title>
-                    <Subtitle>{Sub}</Subtitle>
-                </ModalBox>
-            </ModalContent>
-    
-        </Container>
-    )
-
+interface ModalProps {
+  ModalTitle: string | null;
+  ModalSubtitle: string | null;
+  isVisible: boolean;
+  setIsVisible: React.Dispatch<SetStateAction<boolean>>;
 }
+const ErrorModal: React.FC<ModalProps> = props => {
+  const handleCloseModal = () => {
+    props.setIsVisible(false);
+  };
 
-export default ErrorModal
+  if (!props.isVisible) {
+    return null;
+  }
+
+  return (
+    <Modal transparent visible={true}>
+
+      <Container>
+        <ModalContent>
+          <Button onPress={handleCloseModal}>
+            <TextButton>X Fechar</TextButton>
+          </Button>
+
+          <ModalBox>
+            <Image
+              source={require('../../../assets/error.png')}
+              style={{
+                height: 52,
+                width: 52,
+              }}
+            />
+
+            <Title>{props.ModalTitle}</Title>
+            <Subtitle>{props.ModalSubtitle}</Subtitle>
+          </ModalBox>
+        </ModalContent>
+      </Container>
+
+    </Modal>
+  );
+};
+
+export default ErrorModal;

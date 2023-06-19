@@ -20,11 +20,6 @@ export default function Routes() {
         component={Login}
 	      options={{headerShown: false}}
       /> 
-      <Stack.Screen
-        name='Fail'
-        component={ErrorModal}
-        options={{headerShown: false}}
-      />
     </Stack.Navigator>
   );
 }
