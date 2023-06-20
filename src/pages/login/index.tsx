@@ -20,15 +20,41 @@ import {
   Content,
 } from './styles';
 import ErrorModal from '../../components/fail';
+import {UserLogin} from '../../api/UserApi';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
   const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
-
   const [modalIsVisible, setModalIsVisible] = useState(false);
+
+  const [errorMessage, setErrorMessage] = useState('')
+
+
 
   const handleOpenModal = () => {
     setModalIsVisible(true);
+  };
+
+ 
+  const handleLogin = () => {
+    UserLogin({
+      cpf: cpf.replace(/[^\w\s]/gi, ''),
+      senha: password,
+    })
+      .then((result: any) => {
+        if (result.status == 201) {
+          AsyncStorage.setItem('AccessToken', result.data.token);
+          navigation.navigate('Home');
+        }
+        if (result.status != 201) {
+          handleOpenModal();
+          setErrorMessage(result.message)
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
   };
 
   useEffect(() => {
@@ -45,8 +71,8 @@ const Login = () => {
       <Content>
         {modalIsVisible && (
           <ErrorModal
-            ModalTitle={'Titulo do Erro'}
-            ModalSubtitle={'Descrição do erro'}
+            ModalTitle={'Atenção'}
+            ModalSubtitle={errorMessage}
             isVisible={modalIsVisible}
             setIsVisible={setModalIsVisible}
           />
@@ -96,7 +122,7 @@ const Login = () => {
         </Wrapper>
 
         <ButtonWrapper>
-          <Button onPress={handleOpenModal}>
+          <Button onPress={handleLogin}>
             <TextButton>CONFIRMAR</TextButton>
           </Button>
           <RegularLinkText>Não tem uma conta? Cadastre-se!</RegularLinkText>

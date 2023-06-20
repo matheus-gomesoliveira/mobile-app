@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import ApiManager from "./ApiManager";
 
 export const UserLogin = async (data:any) =>{
@@ -5,11 +6,16 @@ export const UserLogin = async (data:any) =>{
         const result = await ApiManager("/login", {
             method:"POST",
             headers:{
-                'content-type':"applicationl/json"
+                'content-type':"application/json"
             },
-            data:data
+            data:{
+                cpf:data.cpf,
+                senha:data.senha
+            }
         })
-    } catch (error) {
-        return error
+        return result
+    } catch (error: any) {
+        const errorAxios: AxiosError = error
+        return errorAxios.response?.data
     }
 }

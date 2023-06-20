@@ -14,12 +14,13 @@ export const ModalContent = styled(View)`
 
 export const Button = styled(TouchableOpacity)`
     align-self: flex-end ;
-    font-weight: 600;
     padding: 12px 0;
 `
 
 export const TextButton = styled(Text)`
     color: #FFFFFF;
+    font-weight: 600;
+    font-size: 14px;
 `
 
 export const ModalBox = styled(View)`
@@ -29,6 +30,8 @@ export const ModalBox = styled(View)`
     width: 100%;
     justify-content: center;
     align-items: center;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
 
 `
 
