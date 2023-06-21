@@ -45,7 +45,12 @@ const Login = () => {
       .then((result: any) => {
         if (result.status == 201) {
           AsyncStorage.setItem('AccessToken', result.data.token);
-          navigation.navigate('Home');
+          navigation.reset({
+            index:0,
+            routes:[{
+              name:'Home'
+            }]
+          });
         }
         if (result.status != 201) {
           handleOpenModal();

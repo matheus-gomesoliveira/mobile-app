@@ -12,10 +12,30 @@ import {
   MainHeaderWrapper,
   MainSection,
 } from './styles';
+import ErrorModal from '../../components/fail';
+import {useState} from 'react';
 
 const Dahsboard = () => {
+  const handleLogOut = () => {
+    handleOpenModal
+    
+  };
+  const [modalIsVisible, setModalIsVisible] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalIsVisible(true);
+  };
+
   return (
     <Container>
+      {modalIsVisible && (
+        <ErrorModal
+          ModalTitle={'Atenção'}
+          ModalSubtitle={'Tem certeza que deseja sair?'}
+          isVisible={modalIsVisible}
+          setIsVisible={setModalIsVisible}>
+          </ErrorModal>
+      )}
       <MainSection>
         <Image
           source={require('../../../assets/wave.png')}
@@ -35,8 +55,8 @@ const Dahsboard = () => {
               height: 30,
             }}
           />
-          <TouchableOpacity>
-            <Image source={require('../../../assets/menu.png')} />
+          <TouchableOpacity onPress={handleOpenModal}>
+            <Image source={require('../../../assets/LogOut.png')} />
           </TouchableOpacity>
         </MainHeaderWrapper>
 

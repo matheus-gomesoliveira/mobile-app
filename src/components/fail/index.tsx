@@ -1,4 +1,4 @@
-import React, {SetStateAction, useState} from 'react';
+import React, {Children, ReactNode, SetStateAction, useState} from 'react';
 import {Image, Modal, Text, TouchableOpacity, View} from 'react-native';
 import {
   Button,
@@ -14,9 +14,10 @@ interface ModalProps {
   ModalTitle: string | null;
   ModalSubtitle: string | null;
   isVisible: boolean;
+  children: ReactNode | null;
   setIsVisible: React.Dispatch<SetStateAction<boolean>>;
 }
-const ErrorModal: React.FC<ModalProps> = props => {
+const ErrorModal: React.FC<ModalProps> = (props) => {
   const handleCloseModal = () => {
     props.setIsVisible(false);
   };
@@ -45,6 +46,7 @@ const ErrorModal: React.FC<ModalProps> = props => {
 
             <Title>{props.ModalTitle}</Title>
             <Subtitle>{props.ModalSubtitle}</Subtitle>
+            {props.children}
           </ModalBox>
         </ModalContent>
       </Container>
