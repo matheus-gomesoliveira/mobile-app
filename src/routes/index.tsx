@@ -4,6 +4,7 @@ import Welcome from '../pages/welcome';
 import Login from '../pages/login';
 import Dahsboard from '../pages/dashboard';
 import Splash from '../pages/splash';
+import AddresForm from '../pages/onboarding/onboardingAdress';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,11 @@ export default function Routes() {
       <Stack.Screen
         name="Login"
         component={Login}
+	      options={{headerShown: false}}
+      /> 
+      <Stack.Screen
+        name="OnboardingAddress"
+        component={AddresForm}
 	      options={{headerShown: false}}
       /> 
       <Stack.Screen

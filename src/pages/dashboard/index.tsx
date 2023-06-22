@@ -45,6 +45,14 @@ const Dahsboard = () => {
     setModalIsVisible(true);
   };
 
+  function formattedBalance(valor: string) {
+    const formatter = new Intl.NumberFormat('pt-BR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+    return formatter.format(Number(valor));
+  }
+
   useEffect(() => {
     getBalance();
   }, []);
@@ -55,7 +63,7 @@ const Dahsboard = () => {
       console.log(res?.data);
       const userData = res?.data;
       setUserData(userData);
-      setBalance(userData.saldo);
+      setBalance(formattedBalance(userData.saldo));
     } catch (e) {
       console.log(e);
     }
@@ -101,7 +109,7 @@ const Dahsboard = () => {
         <BalanceWrapper>
           <BalanceTitle>Seu Saldo</BalanceTitle>
           <BalanceVisible>
-            <Balance>RC {balanceIsVisible? parseFloat(balance).toFixed(2): "**.**"}</Balance>
+            <Balance>RC {balanceIsVisible? (balance): "**.**"}</Balance>
             <TouchableOpacity onPress={handleBalanceIsVisible}>
               {balanceIsVisible?(
                 <Image 

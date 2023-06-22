@@ -26,28 +26,27 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
   const [cpf, setCpf] = useState('');
-  
+
   const [password, setPassword] = useState('');
-  
+
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
-  const [errorMessage, setErrorMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const[passwordIsVisible, setPasswordIsVisible] = useState(true)
+  const [passwordIsVisible, setPasswordIsVisible] = useState(true);
 
-  const handlePasswordIsVisible = ()=>{
-    if(passwordIsVisible){
-      setPasswordIsVisible(false)
+  const handlePasswordIsVisible = () => {
+    if (passwordIsVisible) {
+      setPasswordIsVisible(false);
     } else {
-      setPasswordIsVisible(true)
+      setPasswordIsVisible(true);
     }
-  }
+  };
 
   const handleOpenModal = () => {
     setModalIsVisible(true);
   };
 
- 
   const handleLogin = () => {
     UserLogin({
       cpf: cpf.replace(/[^\w\s]/gi, ''),
@@ -57,16 +56,18 @@ const Login = () => {
         if (result.status == 201) {
           AsyncStorage.setItem('AccessToken', result.data.token);
           navigation.reset({
-            index:0,
-            routes:[{
-              name:'Home'
-            }]
+            index: 0,
+            routes: [
+              {
+                name: 'Home',
+              },
+            ],
           });
-          console.log(cpf)
+          console.log(cpf);
         }
         if (result.status != 201) {
           handleOpenModal();
-          setErrorMessage(result.message)
+          setErrorMessage(result.message);
         }
       })
       .catch(err => {
@@ -90,15 +91,14 @@ const Login = () => {
             ModalTitle={'Atenção'}
             ModalSubtitle={errorMessage}
             isVisible={modalIsVisible}
-            setIsVisible={setModalIsVisible}
-          >            
+            setIsVisible={setModalIsVisible}>
           </ErrorModal>
         )}
         <Wrapper>
           <Image
             source={require('../../../assets/logo_rub_welcome.png')}
             style={{
-              resizeMode:'contain',
+              resizeMode: 'contain',
               height: 28,
               width: 134,
             }}
@@ -132,28 +132,28 @@ const Login = () => {
                     keyboardType="default"
                     value={password}
                     secureTextEntry={passwordIsVisible}
-                    onChangeText={setPassword}>
-                  </InputSenha>
+                    onChangeText={setPassword}></InputSenha>
                   <TouchableOpacity onPress={handlePasswordIsVisible}>
-                      {passwordIsVisible? (
+                    {passwordIsVisible ? (
                       <Image
-                          source={require('../../../assets/eye.png')}
-                          style={{
-                            height:25,
-                            width:25,
-                            right:36
-                          }}
-                      />):(
+                        source={require('../../../assets/eye.png')}
+                        style={{
+                          height: 25,
+                          width: 25,
+                          right: 36,
+                        }}
+                      />
+                    ) : (
                       <Image
                         source={require('../../../assets/eye-off.png')}
                         style={{
-                          height:25,
-                          width:25,
-                          right:36
+                          height: 25,
+                          width: 25,
+                          right: 36,
                         }}
-                    />)
-                    }
-                    </TouchableOpacity>
+                      />
+                    )}
+                  </TouchableOpacity>
                 </LabelIsVisible>
               </LabelPlaceholderWrapper>
 
@@ -169,7 +169,8 @@ const Login = () => {
             <TextButton>CONFIRMAR</TextButton>
           </Button>
 
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('OnboardingAddress')}>
             <RegularLinkText>Não tem uma conta? Cadastre-se!</RegularLinkText>
           </TouchableOpacity>
         </ButtonWrapper>
