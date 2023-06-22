@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {Image} from 'react-native';
+import {Image, TouchableOpacity} from 'react-native';
 import {
   Container,
   RegularLinkText,
@@ -18,6 +18,7 @@ import {
   Input,
   InputSenha,
   Content,
+  LabelIsVisible,
 } from './styles';
 import ErrorModal from '../../components/fail';
 import {UserLogin} from '../../api/UserApi';
@@ -25,12 +26,22 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
   const [cpf, setCpf] = useState('');
+  
   const [password, setPassword] = useState('');
+  
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState('')
 
+  const[passwordIsVisible, setPasswordIsVisible] = useState(true)
 
+  const handlePasswordIsVisible = ()=>{
+    if(passwordIsVisible){
+      setPasswordIsVisible(false)
+    } else {
+      setPasswordIsVisible(true)
+    }
+  }
 
   const handleOpenModal = () => {
     setModalIsVisible(true);
@@ -51,6 +62,7 @@ const Login = () => {
               name:'Home'
             }]
           });
+          console.log(cpf)
         }
         if (result.status != 201) {
           handleOpenModal();
@@ -64,7 +76,6 @@ const Login = () => {
 
   useEffect(() => {
     if (!modalIsVisible) {
-      setCpf('');
       setPassword('');
     }
   }, [modalIsVisible]);
@@ -80,12 +91,14 @@ const Login = () => {
             ModalSubtitle={errorMessage}
             isVisible={modalIsVisible}
             setIsVisible={setModalIsVisible}
-          />
+          >            
+          </ErrorModal>
         )}
         <Wrapper>
           <Image
             source={require('../../../assets/logo_rub_welcome.png')}
             style={{
+              resizeMode:'contain',
               height: 28,
               width: 134,
             }}
@@ -112,16 +125,41 @@ const Login = () => {
 
               <LabelPlaceholderWrapper>
                 <SmallText>Senha</SmallText>
-                <InputSenha
-                  placeholder="Insira sua senha"
-                  placeholderTextColor="rgba(170, 171, 171, 1)"
-                  keyboardType="default"
-                  value={password}
-                  secureTextEntry={true}
-                  onChangeText={setPassword}></InputSenha>
+                <LabelIsVisible>
+                  <InputSenha
+                    placeholder="Insira sua senha"
+                    placeholderTextColor="rgba(170, 171, 171, 1)"
+                    keyboardType="default"
+                    value={password}
+                    secureTextEntry={passwordIsVisible}
+                    onChangeText={setPassword}>
+                  </InputSenha>
+                  <TouchableOpacity onPress={handlePasswordIsVisible}>
+                      {passwordIsVisible? (
+                      <Image
+                          source={require('../../../assets/eye.png')}
+                          style={{
+                            height:25,
+                            width:25,
+                            right:36
+                          }}
+                      />):(
+                      <Image
+                        source={require('../../../assets/eye-off.png')}
+                        style={{
+                          height:25,
+                          width:25,
+                          right:36
+                        }}
+                    />)
+                    }
+                    </TouchableOpacity>
+                </LabelIsVisible>
               </LabelPlaceholderWrapper>
 
-              <RegularLinkText>Esqueceu a sua senha?</RegularLinkText>
+              <TouchableOpacity>
+                <RegularLinkText>Esqueceu a sua senha?</RegularLinkText>
+              </TouchableOpacity>
             </InputsWrapper>
           </TitleInputWrapper>
         </Wrapper>
@@ -130,7 +168,10 @@ const Login = () => {
           <Button onPress={handleLogin}>
             <TextButton>CONFIRMAR</TextButton>
           </Button>
-          <RegularLinkText>Não tem uma conta? Cadastre-se!</RegularLinkText>
+
+          <TouchableOpacity>
+            <RegularLinkText>Não tem uma conta? Cadastre-se!</RegularLinkText>
+          </TouchableOpacity>
         </ButtonWrapper>
       </Content>
     </Container>

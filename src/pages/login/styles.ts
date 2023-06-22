@@ -99,3 +99,8 @@ export const ButtonWrapper = styled(View)`
     align-items: center;
     gap:21px;
 `
+
+export const LabelIsVisible = styled(View)`
+    flex-direction: row;
+    align-items: center;
+`

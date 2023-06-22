@@ -5,25 +5,60 @@ import {
   BalanceVisible,
   BalanceWrapper,
   BoxText,
+  ButtonTitle,
   Container,
   FeatureBox,
   Features,
   FeaturesSection,
+  LogOutButton,
   MainHeaderWrapper,
   MainSection,
 } from './styles';
 import ErrorModal from '../../components/fail';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/native';
+import {GetAccountBalance} from '../../api/AccountApi';
 
 const Dahsboard = () => {
+  const navigation = useNavigation();
+
   const handleLogOut = () => {
-    handleOpenModal
-    
+    AsyncStorage.removeItem('AccessToken');
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'Welcome'}],
+    });
   };
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
+  const [userData, setUserData] = useState('');
+  const [balance, setBalance] = useState('**.**');
+
+  const [balanceIsVisible, setBalanceIsVIsible] = useState(true);
+
+  const handleBalanceIsVisible = ()=>{
+    setBalanceIsVIsible(!balanceIsVisible);
+  }
+
   const handleOpenModal = () => {
     setModalIsVisible(true);
+  };
+
+  useEffect(() => {
+    getBalance();
+  }, []);
+
+  const getBalance = async () => {
+    try {
+      const res = await GetAccountBalance();
+      console.log(res?.data);
+      const userData = res?.data;
+      setUserData(userData);
+      setBalance(userData.saldo);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -34,7 +69,10 @@ const Dahsboard = () => {
           ModalSubtitle={'Tem certeza que deseja sair?'}
           isVisible={modalIsVisible}
           setIsVisible={setModalIsVisible}>
-          </ErrorModal>
+          <LogOutButton onPress={handleLogOut}>
+            <ButtonTitle>SAIR</ButtonTitle>
+          </LogOutButton>
+        </ErrorModal>
       )}
       <MainSection>
         <Image
@@ -63,9 +101,17 @@ const Dahsboard = () => {
         <BalanceWrapper>
           <BalanceTitle>Seu Saldo</BalanceTitle>
           <BalanceVisible>
-            <Balance>RC 256,08</Balance>
-            <TouchableOpacity>
-              <Image source={require('../../../assets/visible.png')} />
+            <Balance>RC {balanceIsVisible? parseFloat(balance).toFixed(2): "**.**"}</Balance>
+            <TouchableOpacity onPress={handleBalanceIsVisible}>
+              {balanceIsVisible?(
+                <Image 
+                  source={require('../../../assets/visible.png')} 
+                />):(
+                  <Image 
+                    source={require('../../../assets/not-visible.png')} 
+                  />
+                )
+              }
             </TouchableOpacity>
           </BalanceVisible>
         </BalanceWrapper>

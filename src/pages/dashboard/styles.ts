@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import styled from "styled-components";
 
 interface FeatureBoxProps{
@@ -78,4 +78,20 @@ export const FeatureBox = styled(TouchableOpacity)`
     elevation:5;
     height: 20%;
     margin-bottom: 10%;
+`
+
+export const ButtonTitle = styled(Text)`
+    font-size: 16px;
+    font-weight: 500;
+    color: #FFFFFF;
+`
+
+export const LogOutButton = styled(TouchableOpacity)`
+    margin-top: 20px;
+		height: 48px;
+		width: 240px;
+		align-items: center;
+		justify-content: center;
+    border-radius: 100px;
+    background-color: red;
 `
