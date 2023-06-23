@@ -1,12 +1,13 @@
 import { TextInput, TouchableOpacity, View } from "react-native";
 import { Text } from "react-native-animatable";
+import { TextInputMask } from "react-native-masked-text";
 import styled from "styled-components";
 
 export const Container = styled(View)`
     flex: 1;
     background-color:#FFFFFF;
     box-sizing: border-box;
-    padding: 15% 36px 8% 36px;
+    padding: 15% 36px 8% ;
 `
 export const StatusBar = styled(View)`
     flex-direction: row;
@@ -27,7 +28,27 @@ export const Title = styled(Text)`
     text-align: center;
 `
 
-export const Input = styled(TextInput)`
+export const InfoText = styled(Text)`
+    color: rgba(170, 171, 171, 1);
+    font-weight: 400;
+    font-size: 12px;
+    width: 80%;
+`
+
+export const Strong = styled(Text)`
+    font-weight: 700;
+`
+
+export const Input = styled(TextInputMask)`
+    width: 100%;
+    border-bottom-width:1px ;
+`
+
+export const SmallInput = styled(TextInput)`
+    border-bottom-width:1px ;
+`
+
+export const NoMaskInput = styled(TextInput)`
     width: 100%;
     border-bottom-width:1px ;
 `
@@ -59,12 +80,49 @@ export const TextButton = styled(Text)`
 `
 //WRAPERS//
 
-export const Header = styled(View)`
+export const Wrap = styled(View)`
 
+`
+
+export const SameLineInputs = styled(View)`
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+`
+
+export const CepTitleWrap = styled(View)`
+    align-self: center;
+    width: 80%;
+`
+export const CepWrap = styled(View)`
+    height: 100%;
+    justify-content: space-between;
+`
+
+export const Header = styled(View)`
+    gap: 20px;
+`
+
+export const InputLabelBox = styled(View)`
+    width: 47%;
+`
+
+export const InputLabelBigBox = styled(View)`
+    width: 77%;
+`
+
+export const InputLabelSmallBox = styled(View)`
+    width: 17%;
 `
 
 export const InputLabel = styled(View)`
     padding-top: 20px;
 `
-
+export const Info = styled(View)`
+    padding-top: 40px;
+    flex-direction: row;
+    align-self: flex-start;
+    gap:10px;
+    align-items:center;
+`
 

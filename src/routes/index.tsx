@@ -4,7 +4,9 @@ import Welcome from '../pages/welcome';
 import Login from '../pages/login';
 import Dahsboard from '../pages/dashboard';
 import Splash from '../pages/splash';
-import AddresForm from '../pages/onboarding/onboardingAdress';
+import CepScreen from '../pages/onboarding/cep-screen';
+import UserScreen from '../pages/onboarding/user-screen';
+import AddressScreen from '../pages/onboarding/address-screen';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,10 +29,20 @@ export default function Routes() {
 	      options={{headerShown: false}}
       /> 
       <Stack.Screen
-        name="OnboardingAddress"
-        component={AddresForm}
+        name="OnboardingUser"
+        component={UserScreen}
 	      options={{headerShown: false}}
       /> 
+      <Stack.Screen
+        name="OnboardingCep"
+        component={CepScreen}
+	      options={{headerShown: false}}
+      /> 
+      <Stack.Screen
+        name="OnboardingAddress"
+        component={AddressScreen}
+	      options={{headerShown: false}}
+      />
       <Stack.Screen
         name="Home"
         component={Dahsboard}

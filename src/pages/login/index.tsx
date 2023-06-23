@@ -170,7 +170,7 @@ const Login = () => {
           </Button>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate('OnboardingAddress')}>
+            onPress={() => navigation.navigate('OnboardingUser')}>
             <RegularLinkText>Não tem uma conta? Cadastre-se!</RegularLinkText>
           </TouchableOpacity>
         </ButtonWrapper>
