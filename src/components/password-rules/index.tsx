@@ -12,7 +12,7 @@ const PasswordRules= ()=>{
         <Container>
 
             <TextBox>
-                <TouchableOpacity onPress={()=>navigation.navigate('OnboardingPassword')}>
+                <TouchableOpacity onPress={()=>navigation.goBack()}>
                     <Image
                         source={require('../../../assets/close.png')}
                     />
@@ -39,7 +39,7 @@ const PasswordRules= ()=>{
                 </Topic>
             </TextBox>
             <ButtonView>
-                <Button onPress={()=>navigation.navigate('OnboardingPassword')}>
+                <Button onPress={()=>navigation.goBack()}>
                     <TextButton>ENTENDI</TextButton>
                 </Button>
             </ButtonView>
