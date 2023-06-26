@@ -8,6 +8,7 @@ export const Container = styled(View)`
     background-color:#FFFFFF;
     box-sizing: border-box;
     padding: 15% 36px 8% ;
+    justify-content: space-between;
 `
 export const StatusBar = styled(View)`
     flex-direction: row;
@@ -33,6 +34,12 @@ export const InfoText = styled(Text)`
     font-weight: 400;
     font-size: 12px;
     width: 80%;
+`
+
+export const PasswordInfoText = styled(Text)`
+    color:rgba(0, 32, 74, 1);
+    font-weight: bold;
+    font-size: 12px;
 `
 
 export const Strong = styled(Text)`
@@ -62,8 +69,8 @@ export const ButtonView = styled(View)`
     padding-top: 20px;
 `
 
-export const Button =  styled(TouchableOpacity)`
-    align-self: center;
+export const Button =  styled(TouchableOpacity)<{isLogin?: boolean}>`
+    align-self: ${(props)=>props.isLogin?"flex-end": "center"};
     justify-self: flex-end;
     align-items: center;
     justify-content: center;
@@ -72,7 +79,10 @@ export const Button =  styled(TouchableOpacity)`
     height: 48px;
     border-radius: 500px;
     background-color: rgba(29, 28, 62, 1);
+    padding: ${(props)=>props.isLogin?"10px": "0px"};
 `
+
+
 export const TextButton = styled(Text)`
     color:#FFFFFF;
     font-weight: 500;
@@ -125,4 +135,14 @@ export const Info = styled(View)`
     gap:10px;
     align-items:center;
 `
+
+export const PasswordInfo = styled(View)`
+    padding-bottom: 20px;
+    flex-direction: row;
+    gap:10px;
+    align-items:center;
+    align-self: center;
+`
+
+
 

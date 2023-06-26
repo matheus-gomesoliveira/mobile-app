@@ -19,13 +19,15 @@ import {
   Strong,
   Title,
 } from '../global-styles';
+import { useNavigation } from '@react-navigation/native';
 
 export const AddressScreen = () => {
+  const navigation = useNavigation()
+  
   return (
     <Container>
       <Header>
         <StatusBar>
-          <BarStatus />
           <BarStatus />
           <BarStatus />
         </StatusBar>
@@ -103,7 +105,7 @@ export const AddressScreen = () => {
         </SameLineInputs>
       </ScrollView>
       <ButtonView>
-        <Button>
+        <Button onPress={()=>navigation.navigate('OnboardingPassword')}>
           <ButtonTitle>CONFIRMAR</ButtonTitle>
         </Button>
       </ButtonView>

@@ -36,11 +36,7 @@ const Login = () => {
   const [passwordIsVisible, setPasswordIsVisible] = useState(true);
 
   const handlePasswordIsVisible = () => {
-    if (passwordIsVisible) {
-      setPasswordIsVisible(false);
-    } else {
-      setPasswordIsVisible(true);
-    }
+      setPasswordIsVisible(!passwordIsVisible);
   };
 
   const handleOpenModal = () => {

@@ -88,10 +88,10 @@ export const ButtonTitle = styled(Text)`
 
 export const LogOutButton = styled(TouchableOpacity)`
     margin-top: 20px;
-		height: 48px;
-		width: 240px;
-		align-items: center;
-		justify-content: center;
+    height: 48px;
+    width: 240px;
+    align-items: center;
+    justify-content: center;
     border-radius: 100px;
     background-color: red;
 `
