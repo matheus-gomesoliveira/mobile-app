@@ -60,6 +60,8 @@ export const TitleInfo = styled(View)`
 export const BigText = styled(Text)`
     font-size: 16px;
     color:rgba(0,0,0,1);
+    width: 80%;
+    padding-bottom: 8px;
 `
 
 export const MediumText = styled(Text)`

@@ -4,6 +4,7 @@ import CepScreen from '../pages/onboarding/cep-screen';
 import AddressScreen from '../pages/onboarding/address-screen';
 import AppPasswordScreen from '../pages/onboarding/app-password';
 import TransactionPasswordScreen from '../pages/onboarding/transaction-password';
+import PasswordRules from '../components/password-rules';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +35,11 @@ export default function OnboardingStack() {
         name="OnboardingTransaction"
         component={TransactionPasswordScreen}
         options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="PasswordRules"
+        component={PasswordRules}
+	      options={{headerShown: false}}
       />
     </Stack.Navigator>
   );

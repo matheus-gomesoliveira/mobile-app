@@ -15,25 +15,19 @@ import {
   MainSection,
 } from './styles';
 import ErrorModal from '../../components/fail';
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import {GetAccountBalance} from '../../api/AccountApi';
+import { Account, Address, User, UserContext, UserData } from '../../context/AppContext';
+import { GetUserData } from '../../api/UserApi';
 
 const Dahsboard = () => {
   const navigation = useNavigation();
 
-  const handleLogOut = () => {
-    AsyncStorage.removeItem('AccessToken');
-    navigation.reset({
-      index: 0,
-      routes: [{name: 'Welcome'}],
-    });
-  };
+  const { userData, setUserData } = useContext(UserContext);
+  
   const [modalIsVisible, setModalIsVisible] = useState(false);
-
-  const [userData, setUserData] = useState('');
-  const [balance, setBalance] = useState('**.**');
 
   const [balanceIsVisible, setBalanceIsVIsible] = useState(true);
 
@@ -45,7 +39,16 @@ const Dahsboard = () => {
     setModalIsVisible(true);
   };
 
-  function formattedBalance(valor: string) {
+  const handleLogOut = () => {
+    AsyncStorage.removeItem('AccessToken');
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'Welcome'}],
+    });
+  };
+
+
+  function formattedBalance(valor: string | undefined) {
     const formatter = new Intl.NumberFormat('pt-BR', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
@@ -53,21 +56,28 @@ const Dahsboard = () => {
     return formatter.format(Number(valor));
   }
 
-  useEffect(() => {
-    getBalance();
-  }, []);
-
-  const getBalance = async () => {
+  const getUser = async ()=>{
     try {
-      const res = await GetAccountBalance();
-      console.log(res?.data);
-      const userData = res?.data;
-      setUserData(userData);
-      setBalance(formattedBalance(userData.saldo));
+      const res = await GetUserData()
+      console.log((res?.data))
+      const jsonString = JSON.stringify(res?.data)
+      const { usuario, endereco, conta } = JSON.parse(jsonString);
+        
+      const updatedUserData: UserData = {
+        usuario: usuario as User,
+        endereco: endereco as Address,
+        conta: conta as Account,
+      };
+      setUserData(updatedUserData);
     } catch (e) {
-      console.log(e);
+      console.log(e)
     }
-  };
+
+  }
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <Container>
@@ -109,7 +119,7 @@ const Dahsboard = () => {
         <BalanceWrapper>
           <BalanceTitle>Seu Saldo</BalanceTitle>
           <BalanceVisible>
-            <Balance>RC {balanceIsVisible? (balance): "**.**"}</Balance>
+            <Balance>RC {balanceIsVisible? (formattedBalance(userData.conta?.saldo)): "**.**"}</Balance>
             <TouchableOpacity onPress={handleBalanceIsVisible}>
               {balanceIsVisible?(
                 <Image 

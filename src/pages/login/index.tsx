@@ -48,22 +48,21 @@ const Login = () => {
       cpf: cpf.replace(/[^\w\s]/gi, ''),
       senha: password,
     })
-      .then((result: any) => {
-        if (result.status == 201) {
-          AsyncStorage.setItem('AccessToken', result.data.token);
+      .then((res: any) => {
+        if (res.status == 201) {
+          AsyncStorage.setItem('AccessToken', res.data.token);
           navigation.reset({
             index: 0,
             routes: [
               {
-                name: 'Home',
+                name: 'App',
               },
             ],
           });
-          console.log(cpf);
         }
-        if (result.status != 201) {
+        if (res.status != 201) {
           handleOpenModal();
-          setErrorMessage(result.message);
+          setErrorMessage(res.response.data.message);
         }
       })
       .catch(err => {
@@ -166,7 +165,7 @@ const Login = () => {
           </Button>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate('OnboardingUser')}>
+            onPress={() => navigation.navigate('Onboarding')}>
             <RegularLinkText>Não tem uma conta? Cadastre-se!</RegularLinkText>
           </TouchableOpacity>
         </ButtonWrapper>

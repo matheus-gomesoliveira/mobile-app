@@ -2,13 +2,42 @@ import { Image, TouchableOpacity } from 'react-native';
 import {Container, WhiteBoard, Content, Header, Title, AuxView, Icon, Button, BigText, Strong, SmallText, Option, Options, User, Wrap} from './styles';
 import { useNavigation } from '@react-navigation/native';
 import PasswordAlt from '../password-alt';
+import { UserContext } from '../../context/AppContext';
+import { useContext } from 'react';
 
 const Profile = () => {
+  const { userData } = useContext(UserContext);
+  const {usuario, conta} = userData
+  
+  const formatedCpf = ()=>{
+    const pattern = /^(\w{3})(\w{3})(\w{3})(\w)$/;
+    const maskedCpf = usuario?.cpf.replace(pattern, '$1.$2.$3') 
+    return maskedCpf
+  }
+
+  function getFirstLetter(fullName: string | undefined): string | undefined {
+    if(fullName){
+      const names = fullName.trim().split(' ');
+  
+      if (names.length === 0) {
+        return '';
+      }
+    
+      const firstName = names[0];
+      const lastName = names[names.length - 1];
+    
+      const firstLetterFirstName = firstName ? firstName.charAt(0) : '';
+      const firstLetterLastName = lastName ? lastName.charAt(0) : '';
+      return firstLetterFirstName + firstLetterLastName;
+    }
+  }
+
   const navigation = useNavigation()
-  const inits = 'JS'
-  const name = 'João de Souza'
-  const cpf = '123.456.789-10'
-  const account = '0001'
+  
+  const inits = getFirstLetter(usuario?.nome)
+  const name = usuario?.nome
+  const cpf = formatedCpf()
+  const account = conta?.numero_conta
   
   
     return (

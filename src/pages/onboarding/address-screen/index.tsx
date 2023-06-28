@@ -20,10 +20,18 @@ import {
   Title,
 } from '../global-styles';
 import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 
 export const AddressScreen = () => {
   const navigation = useNavigation()
-  
+
+  const [cep, setCep] = useState('')
+  const [street, setStreet] = useState('')
+  const [number, setNummber] = useState('')
+  const [complement, setComplement] = useState('')
+  const [neighborhood, setNeighborhood] = useState('')
+  const [city, setCity] = useState('')
+
   return (
     <Container>
       <Header>

@@ -51,6 +51,15 @@ export const BlackTitle = styled(Text)`
     text-align: center;
 `
 
+export const BigText = styled(Text)`
+    width:50%;
+    font-size: 16px;
+    font-weight: 400;
+    color:rgba(0,0,0,1);
+    padding-bottom: 20px;
+    text-align: center;
+`
+
 export const NoMaskInput = styled(TextInput)`
     width: 100%;
     border-bottom-width:1px ;

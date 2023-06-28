@@ -14,7 +14,7 @@ interface ModalProps {
   ModalTitle: string | null;
   ModalSubtitle: string | null;
   isVisible: boolean;
-  children: ReactNode | null;
+  children?: ReactNode;
   setIsVisible: React.Dispatch<SetStateAction<boolean>>;
 }
 const ErrorModal: React.FC<ModalProps> = (props) => {

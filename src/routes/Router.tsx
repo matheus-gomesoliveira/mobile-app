@@ -14,6 +14,8 @@ import Profile from '../pages/profile';
 import BankData from '../pages/bank-data';
 import PasswordAlt from '../pages/password-alt';
 import AddressAlt from '../pages/address-alt';
+import OnboardingStack from './onboardingStack';
+import AppStack from './appStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,62 +36,17 @@ export default function Routes() {
         name="Login"
         component={Login}
 	      options={{headerShown: false}}
-      /> 
+      />
       <Stack.Screen
-        name="OnboardingUser"
-        component={UserScreen}
-	      options={{headerShown: false}}
-      /> 
-      <Stack.Screen
-        name="OnboardingCep"
-        component={CepScreen}
-	      options={{headerShown: false}}
-      /> 
-      <Stack.Screen
-        name="OnboardingAddress"
-        component={AddressScreen}
+        name="Onboarding"
+        component={OnboardingStack}
 	      options={{headerShown: false}}
       />
       <Stack.Screen
-        name="OnboardingPassword"
-        component={AppPasswordScreen}
+        name="App"
+        component={AppStack}
 	      options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="OnboardingTransaction"
-        component={TransactionPasswordScreen}
-	      options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="PasswordRules"
-        component={PasswordRules}
-	      options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="Home"
-        component={Dahsboard}
-	      options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-	      options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="BankData"
-        component={BankData}
-	      options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="PasswordAlt"
-        component={PasswordAlt}
-	      options={{headerShown: false}}
-      /> 
-      <Stack.Screen
-        name="AddressAlt"
-        component={AddressAlt}
-	      options={{headerShown: false}}
-      />               
+      />      
     </Stack.Navigator>
   );
 }

@@ -22,7 +22,7 @@ const Splash = ()=>{
             navigation.reset({
                 index:0,
                 routes:[{
-                  name:'Home'
+                  name:'App'
                 }]
             })
         }

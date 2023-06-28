@@ -104,5 +104,5 @@ export const User = styled(View)`
 `
 
 export const Wrap = styled(View)`
-
+    align-items: center;
 `
