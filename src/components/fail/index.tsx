@@ -45,7 +45,11 @@ const ErrorModal: React.FC<ModalProps> = (props) => {
             />
 
             <Title>{props.ModalTitle}</Title>
-            <Subtitle>{props.ModalSubtitle}</Subtitle>
+            <Subtitle
+              style={{
+                textAlign:'center'
+              }}
+            >{props.ModalSubtitle}</Subtitle>
             {props.children}
           </ModalBox>
         </ModalContent>

@@ -32,6 +32,7 @@ import {
 import ViaCep from '../../api/ViaCep';
 import {changeAdressData, GetUserData} from '../../api/UserApi';
 import ErrorModal from '../../components/fail';
+import { AxiosError } from 'axios';
 
 const AddressAlt = () => {
   const navigation = useNavigation();
@@ -107,7 +108,7 @@ const AddressAlt = () => {
       });
       setSuccess(true);
       await getUser();
-    } catch (e: unknown) {
+    } catch (e:any) {
       setModalIsVisible(true);
       setErrorMessage(e.toString());
       console.log(e);

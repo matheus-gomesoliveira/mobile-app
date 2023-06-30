@@ -1,7 +1,8 @@
 import { ScrollView } from "react-native"
 import { BarStatus, Button, ButtonView, Container, Header, Input, InputLabel, Label, NoMaskInput, StatusBar, TextButton, Title } from "../global-styles"
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {useNavigation} from '@react-navigation/native';
+import { OnboardingContext } from "../../../context/OnboardingContext";
 
 const UserScreen = ()=>{
     const [name, setName] = useState('');
@@ -9,7 +10,26 @@ const UserScreen = ()=>{
     const [phone, setPhone] = useState('');
     const [cpf, setCpf] = useState('');
     const [birth, setBirth] = useState('');
+
+    const {onboardingData, setOnboardingData} = useContext(OnboardingContext)
+
     
+    
+    const handleConfirm = ()=>{
+        const newUser = {
+            nome_completo:name,
+            telefone:phone,
+            email:email,
+            cpf:cpf,
+            data_nascimento:birth,
+        }
+        setOnboardingData((prevData) => ({
+            ...prevData,
+            usuario: newUser,
+        }))
+        navigation.navigate('OnboardingCep')
+    }
+
     const navigation = useNavigation()
 
     return(
@@ -81,7 +101,9 @@ const UserScreen = ()=>{
                 </InputLabel>
             </ScrollView>
             <ButtonView>
-                <Button onPress={()=>navigation.navigate('OnboardingCep')}>
+                <Button 
+                    onPress={handleConfirm}
+                >
                     <TextButton>CONFIRMAR</TextButton>
                 </Button>
             </ButtonView>

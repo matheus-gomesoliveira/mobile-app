@@ -8,6 +8,7 @@ import PasswordAlt from '../pages/password-alt';
 import AddressAlt from '../pages/address-alt';
 import {useState} from 'react';
 import {UserContext, UserData} from '../context/AppContext';
+import TransactionAlt from '../pages/transaction-alt';
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +50,11 @@ export default function AppStack() {
         <Stack.Screen
           name="AddressAlt"
           component={AddressAlt}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="TransactionAlt"
+          component={TransactionAlt}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

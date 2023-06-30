@@ -87,7 +87,7 @@ const Profile = () => {
                     source={require('../../../assets/overview.png')}
                   />
                 </Option>
-                <Option>
+                <Option onPress={()=>navigation.navigate('TransactionAlt')}>
                   <BigText>Alterar senha Transacional</BigText>
                   <Image
                     source={require('../../../assets/overview.png')}

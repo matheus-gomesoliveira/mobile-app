@@ -19,18 +19,20 @@ import {
   Strong,
   Title,
 } from '../global-styles';
-import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {useContext, useEffect, useState} from 'react';
+import {OnboardingContext} from '../../../context/OnboardingContext';
 
 export const AddressScreen = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
-  const [cep, setCep] = useState('')
-  const [street, setStreet] = useState('')
-  const [number, setNummber] = useState('')
-  const [complement, setComplement] = useState('')
-  const [neighborhood, setNeighborhood] = useState('')
-  const [city, setCity] = useState('')
+  const {onboardingData, setOnboardingData} = useContext(OnboardingContext);
+
+  const {endereco} = onboardingData;
+
+  console.log(onboardingData)
+  console.log(endereco?.endereco)
+
 
   return (
     <Container>
@@ -45,75 +47,74 @@ export const AddressScreen = () => {
       </Header>
       <ScrollView>
         <InputLabel>
-            <Label>CEP*</Label>
-            <Input
+          <Label>CEP*</Label>
+          <Input
             placeholder="Insira seu CEP"
             placeholderTextColor="rgba(170, 171, 171, 1)"
             keyboardType="default"
             type={'zip-code'}
-            />
+            value={endereco?.endereco}
+          />
         </InputLabel>
         <InputLabel>
-            <Label>Endereço*</Label>
-            <NoMaskInput
+          <Label>Endereço*</Label>
+          <NoMaskInput
             placeholder="Insira o nome da rua"
             placeholderTextColor="rgba(170, 171, 171, 1)"
             keyboardType="default"
-            />
+          />
         </InputLabel>
         <SameLineInputs>
-            <InputLabelBox>
-                <InputLabel>
-                <Label>Número*</Label>
-                <SmallInput
-                    placeholder="Insira o número"
-                    placeholderTextColor="rgba(170, 171, 171, 1)"
-                    keyboardType="default"
-                />
-                </InputLabel>
-            </InputLabelBox>
-            <InputLabelBox>
-                <InputLabel>
-                <Label>Complemento*</Label>
-                <SmallInput
-                    placeholder="Insira o complemento"
-                    placeholderTextColor="rgba(170, 171, 171, 1)"
-                    keyboardType="default"
-                />
-                </InputLabel>
-            </InputLabelBox>
+          <InputLabelBox>
+            <InputLabel>
+              <Label>Número*</Label>
+              <SmallInput
+                placeholder="Insira o número"
+                placeholderTextColor="rgba(170, 171, 171, 1)"
+                keyboardType="default"
+              />
+            </InputLabel>
+          </InputLabelBox>
+          <InputLabelBox>
+            <InputLabel>
+              <Label>Complemento*</Label>
+              <SmallInput
+                placeholder="Insira o complemento"
+                placeholderTextColor="rgba(170, 171, 171, 1)"
+                keyboardType="default"
+              />
+            </InputLabel>
+          </InputLabelBox>
         </SameLineInputs>
         <InputLabel>
-            <Label>Bairro*</Label>
-            <NoMaskInput
+          <Label>Bairro*</Label>
+          <NoMaskInput
             placeholder="Insira o bairro"
             placeholderTextColor="rgba(170, 171, 171, 1)"
             keyboardType="default"
-            />
+          />
         </InputLabel>
         <SameLineInputs>
-            <InputLabelBigBox>
+          <InputLabelBigBox>
             <InputLabel>
-                <Label>Cidade*</Label>
-                <NoMaskInput
-                    placeholder="Insira a cidade"
-                    placeholderTextColor="rgba(170, 171, 171, 1)"
-                    keyboardType="default"
-                />
-                </InputLabel>
-            </InputLabelBigBox>
-            <InputLabelSmallBox>
-                <InputLabel>
-                    <Label>UF*</Label>
-                    <NoMaskInput
-                        keyboardType="default"
-                    />
-                </InputLabel>
-            </InputLabelSmallBox>
+              <Label>Cidade*</Label>
+              <NoMaskInput
+                placeholder="Insira a cidade"
+                placeholderTextColor="rgba(170, 171, 171, 1)"
+                keyboardType="default"
+              />
+            </InputLabel>
+          </InputLabelBigBox>
+          <InputLabelSmallBox>
+            <InputLabel>
+              <Label>UF*</Label>
+              <NoMaskInput keyboardType="default" />
+            </InputLabel>
+          </InputLabelSmallBox>
         </SameLineInputs>
       </ScrollView>
       <ButtonView>
-        <Button onPress={()=>navigation.navigate('OnboardingPassword')}>
+        <Button onPress={() => navigation.navigate('OnboardingPassword')}>
           <ButtonTitle>CONFIRMAR</ButtonTitle>
         </Button>
       </ButtonView>

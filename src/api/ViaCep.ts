@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 
 interface Address {
@@ -11,7 +11,8 @@ interface Address {
 
 const ViaCep = async(cep: string | undefined)=>{
     try {
-        const res = await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+        const res: AxiosResponse = await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+        console.log(res.data)
         return res
     } catch (e) {
         console.log(e)
