@@ -35,7 +35,7 @@ export const CepScreen = () => {
       cep: cep,
       endereco: res?.data.logradouro,
       bairro: res?.data.bairro,
-      cidade: res?.data.cidade,
+      cidade: res?.data.localidade,
       numero: '',
       uf: res?.data.uf,
       complemento: '',

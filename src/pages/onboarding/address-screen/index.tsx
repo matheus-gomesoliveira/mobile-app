@@ -25,6 +25,8 @@ import {OnboardingContext} from '../../../context/OnboardingContext';
 
 export const AddressScreen = () => {
   const navigation = useNavigation();
+  const [number, setNumber] = useState('')
+
 
   const {onboardingData, setOnboardingData} = useContext(OnboardingContext);
 
@@ -53,7 +55,7 @@ export const AddressScreen = () => {
             placeholderTextColor="rgba(170, 171, 171, 1)"
             keyboardType="default"
             type={'zip-code'}
-            value={endereco?.endereco}
+            value={endereco?.cep}
           />
         </InputLabel>
         <InputLabel>
@@ -62,6 +64,7 @@ export const AddressScreen = () => {
             placeholder="Insira o nome da rua"
             placeholderTextColor="rgba(170, 171, 171, 1)"
             keyboardType="default"
+            value={endereco?.endereco}
           />
         </InputLabel>
         <SameLineInputs>
@@ -72,6 +75,7 @@ export const AddressScreen = () => {
                 placeholder="Insira o número"
                 placeholderTextColor="rgba(170, 171, 171, 1)"
                 keyboardType="default"
+                value={number}
               />
             </InputLabel>
           </InputLabelBox>
@@ -82,6 +86,7 @@ export const AddressScreen = () => {
                 placeholder="Insira o complemento"
                 placeholderTextColor="rgba(170, 171, 171, 1)"
                 keyboardType="default"
+                value={endereco?.complemento}
               />
             </InputLabel>
           </InputLabelBox>
@@ -92,6 +97,7 @@ export const AddressScreen = () => {
             placeholder="Insira o bairro"
             placeholderTextColor="rgba(170, 171, 171, 1)"
             keyboardType="default"
+            value={endereco?.bairro}
           />
         </InputLabel>
         <SameLineInputs>
@@ -102,13 +108,17 @@ export const AddressScreen = () => {
                 placeholder="Insira a cidade"
                 placeholderTextColor="rgba(170, 171, 171, 1)"
                 keyboardType="default"
+                value={endereco?.cidade}
               />
             </InputLabel>
           </InputLabelBigBox>
           <InputLabelSmallBox>
             <InputLabel>
               <Label>UF*</Label>
-              <NoMaskInput keyboardType="default" />
+              <NoMaskInput 
+                keyboardType="default"
+                value={endereco?.uf}
+              />
             </InputLabel>
           </InputLabelSmallBox>
         </SameLineInputs>
