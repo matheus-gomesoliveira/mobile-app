@@ -70,7 +70,7 @@ export const ButtonView = styled(View)`
 `
 
 export const Button =  styled(TouchableOpacity)<{isLogin?: boolean}>`
-    align-self: ${(props)=>props.isLogin?"flex-end": "center"};
+    align-self: center ;
     justify-self: flex-end;
     align-items: center;
     justify-content: center;
@@ -82,11 +82,38 @@ export const Button =  styled(TouchableOpacity)<{isLogin?: boolean}>`
     padding: ${(props)=>props.isLogin?"10px": "0px"};
 `
 
+export const ButtonTitle = styled(Text)`
+    font-size: 16px;
+    font-weight: 500;
+    color: #FFFFFF;
+`
+
+export const LogInButton = styled(TouchableOpacity)`
+    margin-top: 20px;
+    height: 48px;
+    width: 240px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    background-color: rgba(29, 28, 62, 1);
+`
 
 export const TextButton = styled(Text)`
     color:#FFFFFF;
     font-weight: 500;
     font-size: 16px;
+`
+
+export const SmallText = styled(Text)`
+    font-size: 12px;
+    font-weight: 400;
+    color: #f70d1a;
+`
+
+export const Error = styled(View)`
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 1px;
 `
 //WRAPERS//
 

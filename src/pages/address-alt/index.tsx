@@ -42,7 +42,7 @@ const AddressAlt = () => {
   const [cep, setCep] = useState(endereco?.cep);
   const [rua, setRua] = useState(endereco?.rua);
   const [numero, setNumero] = useState(endereco?.numero);
-  const [complemento, setComplemeto] = useState(endereco?.complemento);
+  const [complemento, setComplemento] = useState(endereco?.complemento);
   const [bairro, setBairro] = useState(endereco?.bairro);
   const [cidade, setCidade] = useState(endereco?.cidade);
   const [UF, setUF] = useState(endereco?.uf);
@@ -60,7 +60,7 @@ const AddressAlt = () => {
       const res = await ViaCep(cep);
       setRua(res?.data.logradouro);
       setNumero('');
-      setComplemeto('');
+      setComplemento('');
       setBairro(res?.data.bairro);
       setCidade(res?.data.localidade);
       setUF(res?.data.uf);
@@ -69,7 +69,6 @@ const AddressAlt = () => {
       } else {
         setEditable(false);
       }
-      console.log(res?.data);
     } catch (e) {
       console.log(e);
     }
@@ -78,7 +77,6 @@ const AddressAlt = () => {
   const getUser = async () => {
     try {
       const res = await GetUserData();
-      console.log(res?.data);
       const jsonString = JSON.stringify(res?.data);
       const {endereco} = JSON.parse(jsonString);
 
@@ -197,7 +195,7 @@ const AddressAlt = () => {
                     placeholderTextColor="rgba(170, 171, 171, 1)"
                     keyboardType="default"
                     editable={true}
-                    onChangeText={setComplemeto}
+                    onChangeText={setComplemento}
                     value={complemento}
                   />
                 </InputLabel>

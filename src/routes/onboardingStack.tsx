@@ -13,9 +13,8 @@ const Stack = createNativeStackNavigator();
 export default function OnboardingStack() {
   const [onboardingData, setOnboardingData] = useState<OnboardingData>({
     endereco: null,
-    senha_app: null,
-    senha_transacional: null,
-    usuario: null
+    usuario: null,
+    conta_bancaria:null
   })
 
   return (

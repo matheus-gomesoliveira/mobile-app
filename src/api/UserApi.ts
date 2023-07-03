@@ -97,23 +97,23 @@ export const changeAppPassword = async (data: ChangePassword) =>{
 
 interface data{
   usuario:{
-    nome_completo:string
-    telefone:string
-    email:string
-    cpf:string
-    senha:string
-    data_nascimento:string
+    nome_completo:string | undefined
+    telefone:string | undefined
+    email:string | undefined
+    cpf:string | undefined
+    data_nascimento:string | undefined
+    senha:string | undefined
     endereco:{
-      cep:string
-      rua:string
-      bairro:string
-      cidade:string
-      numero:string
-      uf:string
+      cep:string | undefined
+      rua:string | undefined
+      bairro:string | undefined
+      cidade:string | undefined
+      numero:string | undefined
+      uf:string | undefined
       complemento:string | undefined
     },
     conta_bancaria:{
-      senha_transacional:string
+      senha_transacional:string | undefined
     }
   }
 }
@@ -130,10 +130,33 @@ export const Onboarding = async (data:data) =>{
         ...data
       }
     })
-
+    console.log(data)
     return res
   } catch (e: unknown) {
     if(e instanceof AxiosError)
       console.log(e)
   }
+}
+
+export const validateOnboardingData = async (data:any) =>{
+  try {
+    const res:AxiosResponse = await apiManager('/register/onboardingCheck',{
+      method:'POST',
+      headers:{
+        'content-type': 'application/json',      
+      },
+      data:{
+        cpf:data.cpf,
+        email:data.email,
+        telefone:data.phone
+      }
+    })
+    return res
+  } catch (e:unknown) {
+    if(e instanceof AxiosError){
+      console.log(e)
+      return e
+    }
+    console.log(e)
+  } 
 }

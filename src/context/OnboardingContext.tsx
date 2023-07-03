@@ -2,36 +2,31 @@ import React from "react"
 
 export interface User{
     nome_completo:string
+    telefone: string
     email:string
     cpf:string
+    senha:string
     data_nascimento:string
 }
 
 export interface Address{
-    cep: string
-    endereco:string
-    numero:string
+    cep: string | undefined
+    rua:string | undefined
+    numero:string | undefined
     complemento:string | undefined
-    bairro:string
-    cidade:string
-    uf:string
+    bairro:string | undefined
+    cidade:string | undefined
+    uf:string | undefined
 }
 
-export interface AppPassword{
-    senha:string
-    confirmar_senha:string
-}
-
-export interface TransactionPassword{
-    senha:string
-    confirmar_senha:string
+export interface Account{
+    senha_transacional:string
 }
 
 export interface OnboardingData{
     usuario:User | null
     endereco:Address | null
-    senha_app:AppPassword | null
-    senha_transacional:TransactionPassword | null
+    conta_bancaria:Account | null
 }
 
 interface OnboardingContextProps {
@@ -43,8 +38,7 @@ interface OnboardingContextProps {
     onboardingData: {
       usuario: null,
       endereco: null,
-      senha_app: null,
-      senha_transacional:null,
+      conta_bancaria: null,
     },
     setOnboardingData: () => {},
   });

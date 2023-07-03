@@ -38,20 +38,17 @@ const TransactionAlt = () => {
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
   const passMatch: boolean = newPassword == confirmNewPassword;
-  console.log(passMatch)
   const disabled = ((!password || !newPassword || !confirmNewPassword) || (!passMatch));
 
 
   const changePassword = async () => {
     try {
       if(passMatch){
-          console.log("aaaaaaaaaaaaaa")
           const res = await changeTransactionPassword({
           password:password,
           newPassword:newPassword,
           confirm:confirmNewPassword
         })
-        console.log("----------------" + res?.data.response)
         if(res?.status === 200){
           setSuccess(true)
         }

@@ -27,3 +27,8 @@ export const Subtitle = styled(Text)`
     text-align: center;
     padding-top: 30px;
 `
+
+export const allign = styled(View)`
+    align-self: center;
+    justify-content: center;
+`

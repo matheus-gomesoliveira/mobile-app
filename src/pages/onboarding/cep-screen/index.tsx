@@ -22,32 +22,33 @@ import {
   OnboardingContext,
   OnboardingData,
 } from '../../../context/OnboardingContext';
-import ViaCep from '../../../api/ViaCep';
 
 export const CepScreen = () => {
-  const [cep, setCep] = useState('');
   const navigation = useNavigation();
   const {onboardingData, setOnboardingData} = useContext(OnboardingContext);
 
+  const [cep, setCep] = useState('');
+
+  const disabled = !cep;
+
   const handleConfirm = async () => {
-    const res: any = await ViaCep(cep);
     const updateAddressData: Address = {
       cep: cep,
-      endereco: res?.data.logradouro,
-      bairro: res?.data.bairro,
-      cidade: res?.data.localidade,
+      rua: '',
+      bairro: '',
+      cidade: '',
       numero: '',
-      uf: res?.data.uf,
+      uf: '',
       complemento: '',
     };
     setOnboardingData(prevData => ({
       ...onboardingData,
       endereco: updateAddressData,
     }));
+
     navigation.navigate('OnboardingAddress');
   };
 
-  const disabled = !cep;
 
   return (
     <Container>

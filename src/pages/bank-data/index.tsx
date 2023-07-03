@@ -19,13 +19,32 @@ import {
 } from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {BlackTitle} from '../password-alt/styles';
-import { useContext } from 'react';
-import { UserContext } from '../../context/AppContext';
+import {useContext} from 'react';
+import {UserContext} from '../../context/AppContext';
+import Clipboard from '@react-native-clipboard/clipboard';
 
 const BankData = () => {
-  const { userData, setUserData} = useContext(UserContext)
+  const {userData, setUserData} = useContext(UserContext);
   const accountType = 'Conta Corrente';
-  const navigation = useNavigation()
+  const navigation = useNavigation();
+
+  const pattern = /^(\d{3})(\d{3})(\d{3})(\d{2})$/;
+  const formattedCPF = userData.usuario?.cpf.replace(pattern, '$1.$2.$3-$4');
+
+  const copyText = (text: string | undefined) => {
+    if(text && text !=null){
+      Clipboard.setString(text);
+      console.log('coppied text:', text);
+    }
+  };
+
+  const copyData: string = `
+  agencia:${userData.conta?.agencia.toString()},
+  numero_conta:${userData.conta?.numero_conta.toString()},
+  CPF:${formattedCPF},
+  favorecido:${userData.usuario?.nome}
+  `
+
 
   return (
     <Container>
@@ -61,7 +80,7 @@ const BankData = () => {
                 <MediumText>Agência</MediumText>
                 <MediumText>{userData.conta?.agencia}</MediumText>
               </TitleInfo>
-              <CopyIcon>
+              <CopyIcon onPress={() => copyText(userData.conta?.agencia.toString())}>
                 <Image source={require('../../../assets/copy.png')} />
                 <SmallText>Copiar</SmallText>
               </CopyIcon>
@@ -71,7 +90,7 @@ const BankData = () => {
                 <MediumText>Conta</MediumText>
                 <MediumText>{userData.conta?.numero_conta}</MediumText>
               </TitleInfo>
-              <CopyIcon>
+              <CopyIcon onPress={() => copyText(userData.conta?.numero_conta.toString())}>
                 <Image source={require('../../../assets/copy.png')} />
                 <SmallText>Copiar</SmallText>
               </CopyIcon>
@@ -79,9 +98,9 @@ const BankData = () => {
             <Info>
               <TitleInfo>
                 <MediumText>CPF</MediumText>
-                <MediumText>{userData.usuario?.cpf}</MediumText>
+                <MediumText>{formattedCPF}</MediumText>
               </TitleInfo>
-              <CopyIcon>
+              <CopyIcon onPress={() => copyText(formattedCPF)}>
                 <Image source={require('../../../assets/copy.png')} />
                 <SmallText>Copiar</SmallText>
               </CopyIcon>
@@ -91,7 +110,7 @@ const BankData = () => {
                 <MediumText>Favorecido</MediumText>
                 <MediumText>{userData.usuario?.nome}</MediumText>
               </TitleInfo>
-              <CopyIcon>
+              <CopyIcon onPress={() => copyText(userData.usuario?.nome)}>
                 <Image source={require('../../../assets/copy.png')} />
                 <SmallText>Copiar</SmallText>
               </CopyIcon>
@@ -110,7 +129,7 @@ const BankData = () => {
             </Info>
           </ScrollView>
           <ButtonView>
-            <Button>
+            <Button onPress={() => copyText(copyData)}>
               <ButtonText>COMPARTILHAR DADOS</ButtonText>
             </Button>
           </ButtonView>

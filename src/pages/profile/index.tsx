@@ -8,12 +8,9 @@ import { useContext } from 'react';
 const Profile = () => {
   const { userData } = useContext(UserContext);
   const {usuario, conta} = userData
-  
-  const formatedCpf = ()=>{
-    const pattern = /^(\w{3})(\w{3})(\w{3})(\w)$/;
-    const maskedCpf = usuario?.cpf.replace(pattern, '$1.$2.$3') 
-    return maskedCpf
-  }
+
+  const pattern = /^(\d{3})(\d{3})(\d{3})(\d{2})$/;
+  const formattedCPF = userData.usuario?.cpf.replace(pattern, '$1.$2.$3-$4');
 
   function getFirstLetter(fullName: string | undefined): string | undefined {
     if(fullName){
@@ -36,7 +33,7 @@ const Profile = () => {
   
   const inits = getFirstLetter(usuario?.nome)
   const name = usuario?.nome
-  const cpf = formatedCpf()
+  const cpf = formattedCPF
   const account = conta?.numero_conta
   
   
