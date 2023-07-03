@@ -29,7 +29,7 @@ const Dahsboard = () => {
   
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
-  const [balanceIsVisible, setBalanceIsVIsible] = useState(true);
+  const [balanceIsVisible, setBalanceIsVIsible] = useState(false);
 
   const handleBalanceIsVisible = ()=>{
     setBalanceIsVIsible(!balanceIsVisible);
@@ -123,10 +123,10 @@ const Dahsboard = () => {
             <TouchableOpacity onPress={handleBalanceIsVisible}>
               {balanceIsVisible?(
                 <Image 
-                  source={require('../../../assets/visible.png')} 
+                  source={require('../../../assets/not-visible.png')} 
                 />):(
                   <Image 
-                    source={require('../../../assets/not-visible.png')} 
+                    source={require('../../../assets/visible.png')} 
                   />
                 )
               }
