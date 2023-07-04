@@ -25,6 +25,7 @@ import SuccessNoButton from '../../components/success-no-button';
 import {useState} from 'react';
 import ErrorModal from '../../components/fail';
 import { changeTransactionPassword } from '../../api/AccountApi';
+import { AxiosResponse } from 'axios';
 
 const TransactionAlt = () => {
   const navigation = useNavigation();
@@ -42,22 +43,19 @@ const TransactionAlt = () => {
 
 
   const changePassword = async () => {
-    try {
       if(passMatch){
-          const res = await changeTransactionPassword({
+          const res: any = await changeTransactionPassword({
           password:password,
           newPassword:newPassword,
           confirm:confirmNewPassword
         })
         if(res?.status === 200){
           setSuccess(true)
+        } else {
+          setModalIsVisible(true)
+          setErrorMessage(res.response.data.errors[0].message)
         }
       }
-    } catch (e: any) {
-      console.log(e)
-      setModalIsVisible(true)
-      setErrorMessage(e.message)
-    }
   }
 
   return (
@@ -113,7 +111,7 @@ const TransactionAlt = () => {
                 </Label>
                 <NoMaskInput
                   keyboardType="default"
-                  secureTextEntry={false}
+                  secureTextEntry={true}
                   value={password}
                   onChangeText={setPassword}
                   maxLength={4}
@@ -125,7 +123,7 @@ const TransactionAlt = () => {
                 </Label>
                 <NoMaskInput
                   keyboardType="numeric"
-                  secureTextEntry={false}
+                  secureTextEntry={true}
                   value={newPassword}
                   onChangeText={setNewPassword}
                   maxLength={4}
@@ -137,7 +135,7 @@ const TransactionAlt = () => {
                 </Label>
                 <NoMaskInput
                   keyboardType="numeric"
-                  secureTextEntry={false}
+                  secureTextEntry={true}
                   value={confirmNewPassword}
                   onChangeText={setConfirmNewPassword}
                   maxLength={4}
@@ -145,7 +143,7 @@ const TransactionAlt = () => {
                 {!passMatch && (
                   <Error>
                     <SmallText>
-                      os campos de nova senha devem coincidir
+                      Os campos de nova senha devem coincidir.
                     </SmallText>
                   </Error>
                 )}

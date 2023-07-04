@@ -140,7 +140,7 @@ const Dahsboard = () => {
             <Image source={require('../../../assets/transfer.png')} />
             <BoxText>Transferir</BoxText>
           </FeatureBox>
-          <FeatureBox>
+          <FeatureBox onPress={()=>navigation.navigate('Extract')}>
             <Image source={require('../../../assets/extract.png')} />
             <BoxText>Extrato</BoxText>
           </FeatureBox>

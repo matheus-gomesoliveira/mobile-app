@@ -171,6 +171,7 @@ const AddressAlt = () => {
                 keyboardType="default"
                 editable={editable}
                 value={rua}
+                onChangeText={setRua}
               />
             </InputLabel>
             <SameLineInputs>
@@ -209,7 +210,10 @@ const AddressAlt = () => {
                 keyboardType="default"
                 editable={editable}
                 value={bairro}
-              />
+                onChangeText={setBairro}
+              >
+
+                </NoMaskInput>
             </InputLabel>
             <SameLineInputs>
               <InputLabelBigBox>

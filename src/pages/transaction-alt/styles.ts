@@ -63,11 +63,10 @@ export const BigText = styled(Text)`
 export const SmallText = styled(Text)`
     font-size: 12px;
     font-weight: 400;
-    color:rgba(255,255,255,1);
+    color: #f70d1a;
 `
 
 export const Error = styled(View)`
-    background-color: #f70d1a;
     justify-content: center;
     box-sizing: border-box;
     padding: 1px;

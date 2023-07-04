@@ -19,36 +19,34 @@ export default function OnboardingStack() {
 
   return (
     <OnboardingContext.Provider value={{onboardingData, setOnboardingData}}>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false
+        }}
+      >
         <Stack.Screen
           name="OnboardingUser"
           component={UserScreen}
-          options={{headerShown: false}}
         />
         <Stack.Screen
           name="OnboardingCep"
           component={CepScreen}
-          options={{headerShown: false}}
         />
         <Stack.Screen
           name="OnboardingAddress"
           component={AddressScreen}
-          options={{headerShown: false}}
         />
         <Stack.Screen
           name="OnboardingPassword"
           component={AppPasswordScreen}
-          options={{headerShown: false}}
         />
         <Stack.Screen
           name="OnboardingTransaction"
           component={TransactionPasswordScreen}
-          options={{headerShown: false}}
         />
         <Stack.Screen
           name="PasswordRules"
           component={PasswordRules}
-          options={{headerShown: false}}
         />
       </Stack.Navigator>
     </OnboardingContext.Provider>
