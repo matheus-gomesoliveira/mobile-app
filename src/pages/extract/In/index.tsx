@@ -1,10 +1,14 @@
-import { Text, View } from "react-native-animatable"
+import { Image} from "react-native"
+import { Content, Piggy, Title } from "./styles"
 
 const ExtractIn = ()=>{
     return(
-    <View>
-        <Text>TUDO</Text>
-    </View>
+        <Content>
+          <Piggy>
+            <Image source={require('../../../../assets/piggy-bank.png')} />
+            <Title>Você ainda não possui lançamentos.</Title>
+          </Piggy>
+        </Content>
     )
 }
 

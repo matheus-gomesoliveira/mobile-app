@@ -117,7 +117,7 @@ const UserScreen = () => {
           setIsPhone(true);
           if (cpfValidation) {
             setIsCpf(true);
-            const res:any = await validateOnboardingData({
+            const res: any = await validateOnboardingData({
               cpf: cpf.replace(/[^\w]/g, ''),
               email: email,
               phone: phone.replace(/[^\w]/g, ''),
@@ -137,9 +137,9 @@ const UserScreen = () => {
               }));
               navigation.navigate('OnboardingCep');
             }
-            if(res?.status != 200){
-              handleOpenModal()
-              setErrorMessage(res.response.data.message)
+            if (res?.status != 200) {
+              handleOpenModal();
+              setErrorMessage(res.response.data.message);
             }
           } else {
             setIsCpf(false);
@@ -165,7 +165,7 @@ const UserScreen = () => {
           ModalSubtitle={errorMessage}
           isVisible={modalIsVisible}
           setIsVisible={setModalIsVisible}>
-          <LogInButton onPress={()=> navigation.navigate('Login')}>
+          <LogInButton onPress={() => navigation.navigate('Login')}>
             <ButtonTitle>FAZER LOGIN</ButtonTitle>
           </LogInButton>
         </ErrorModal>

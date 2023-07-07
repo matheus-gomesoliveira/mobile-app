@@ -1,14 +1,26 @@
 import { Image, TouchableOpacity } from 'react-native';
-import {Container, WhiteBoard, Content, Header, Title, BigText, Strong, SmallText} from './styles';
+import {Container, WhiteBoard, Content, Header, Title, BigText, Strong, SmallText, MediumText, BalanceText, Balance} from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import ExtractAll from '../all';
 import ExtractIn from '../In';
 import ExtractOut from '../out';
+import { UserContext } from '../../../context/AppContext';
+import { useContext } from 'react';
 
 const ExtractScreen = () => {
   const navigation = useNavigation()
   const Tab = createMaterialTopTabNavigator()
+  const { userData, setUserData } = useContext(UserContext);
+  const {usuario, conta, endereco} = userData
+  function formattedBalance(valor: string | undefined) {
+    const formatter = new Intl.NumberFormat('pt-BR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+    return formatter.format(Number(valor));
+  }
+
     return (
     <Container>
       <Header>
@@ -26,10 +38,14 @@ const ExtractScreen = () => {
           <Image source={require('../../../../assets/left-arrow.png')} />
         </TouchableOpacity>
         <Title>Extrato</Title>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Filter')}>
             <Image source={require('../../../../assets/filter.png')} />
         </TouchableOpacity>
       </Header>
+      <Balance>
+        <MediumText><Strong>Saldo disponível</Strong></MediumText>
+        <BalanceText><Strong>RC {formattedBalance(conta?.saldo)}</Strong></BalanceText>
+      </Balance>
       <WhiteBoard>
           
           

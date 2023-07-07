@@ -34,6 +34,7 @@ interface OnboardingContextProps {
     setOnboardingData: React.Dispatch<React.SetStateAction<OnboardingData>>;
   }
 
+
   export const OnboardingContext = React.createContext<OnboardingContextProps>({
     onboardingData: {
       usuario: null,

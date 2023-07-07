@@ -46,7 +46,13 @@ export const BigText = styled(Text)`
 
 export const MediumText = styled(Text)`
     font-size: 14px;
+    color:rgba(255,255,255,1);
 `
+export const BalanceText = styled(Text)`
+    font-size: 18px;
+    color:rgba(255,255,255,1);
+`
+
 export const SmallText = styled(Text)`
     font-size: 10px;
     color:rgba(0, 0, 0, 1);
@@ -54,5 +60,13 @@ export const SmallText = styled(Text)`
 
 export const Strong = styled(Text)`
     font-weight: 500;
-    color:rgba(56, 56, 56, 1);
+`
+
+export const Balance = styled(View)`
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    align-self: center;
+    padding-bottom: 25px;
+    align-items: center;
 `

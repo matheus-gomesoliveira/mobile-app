@@ -10,6 +10,8 @@ import {useState} from 'react';
 import {UserContext, UserData} from '../context/AppContext';
 import TransactionAlt from '../pages/transaction-alt';
 import ExtractScreen from '../pages/extract/main_page';
+import FilterScreen from '../pages/extract/filters';
+import ExtractStack from './extractStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -56,8 +58,8 @@ export default function AppStack() {
           component={TransactionAlt}
         />
         <Stack.Screen
-          name="Extract"
-          component={ExtractScreen}
+          name="ExtractStack"
+          component={ExtractStack}
         />
       </Stack.Navigator>
     </UserContext.Provider>

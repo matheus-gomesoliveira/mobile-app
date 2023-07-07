@@ -18,7 +18,6 @@ import ErrorModal from '../../components/fail';
 import {useContext, useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
-import {GetAccountBalance} from '../../api/AccountApi';
 import { Account, Address, User, UserContext, UserData } from '../../context/AppContext';
 import { GetUserData } from '../../api/UserApi';
 
@@ -30,6 +29,7 @@ const Dahsboard = () => {
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
   const [balanceIsVisible, setBalanceIsVIsible] = useState(false);
+
 
   const handleBalanceIsVisible = ()=>{
     setBalanceIsVIsible(!balanceIsVisible);
@@ -77,7 +77,7 @@ const Dahsboard = () => {
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [userData.conta?.saldo]);
 
   return (
     <Container>
@@ -140,7 +140,7 @@ const Dahsboard = () => {
             <Image source={require('../../../assets/transfer.png')} />
             <BoxText>Transferir</BoxText>
           </FeatureBox>
-          <FeatureBox onPress={()=>navigation.navigate('Extract')}>
+          <FeatureBox onPress={()=>navigation.navigate('ExtractStack')}>
             <Image source={require('../../../assets/extract.png')} />
             <BoxText>Extrato</BoxText>
           </FeatureBox>

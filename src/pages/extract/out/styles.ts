@@ -6,13 +6,12 @@ export const Content = styled(View)`
     justify-content: space-between;
     box-sizing: border-box;
     padding: 0 36px;
-    background-color: #FFFFFFFF;
 `
 
 export const TransferContainer = styled(View)`
     flex-direction: row;
     height: 74px;
-    padding: 10px 0;
+    padding-top: 20px;
     align-items: center;
     justify-content: space-between;
 `

@@ -52,11 +52,14 @@ export const changeTransactionPassword = async (data:changeTransactional) => {
 }
 
 export interface Transfer{
+    id_transferencia: number;
     conta_destino: number;
     conta_origem: number;
-    data_transferencia: string;
+    data_transferencia:{
+        data:string,
+        hora:string
+    } ;
     descricao: string;
-    id_transferencia: number;
     status: string;
     tipo: string;
     valor: string;
@@ -64,17 +67,38 @@ export interface Transfer{
 
 export interface Extract{
     transferencias: Transfer[]
+    paginas:{
+        pagina:number,
+        total:number
+    }
 }
 
-export const getExtract = async () => {
+export interface DataParams{
+    page?: string 
+    type?:  string 
+    order?:  string 
+    start_date?:  string 
+    end_date?:  string 
+}
+
+
+export const getExtract = async (data?:DataParams) => {
     try {
+        console.log(data)
+        const queryParams = new URLSearchParams()
+
+        if(data?.page != ""){
+            queryParams.append("page", data?.page as string)
+        }
+        const url = `/extract/?${queryParams.toString()}`
+        console.log(url)
         const token = await AsyncStorage.getItem('AccessToken')
-        const res = await ApiManager.get<Extract>('/extract', {
+        const res = await ApiManager.get<Extract>(url, {
             headers:{
                 Authorization:`Bearer ${token}`
             }
         })
-        console.log(res)
+        console.log("pagina:"+data?.page)
         return res.data
     } catch (e: unknown) {
         if(e instanceof AxiosError)
