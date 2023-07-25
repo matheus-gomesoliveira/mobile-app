@@ -3,10 +3,10 @@ import { Container, Subtitle, Title } from './styles';
 import { ReactNode, SetStateAction } from 'react';
 
 interface props{
-    title: string | null;
-    firstSubtitle: string | null;
-    secondSubtitle: string | null;
-    children: ReactNode | null;
+    title?: string | null;
+    firstSubtitle?: string | null;
+    secondSubtitle?: string | null;
+    children?: ReactNode | null;
     isVisible: boolean;
     setIsVisible: React.Dispatch<SetStateAction<boolean>>;}
 

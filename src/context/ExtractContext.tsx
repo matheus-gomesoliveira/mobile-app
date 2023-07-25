@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export interface Params{
     page?: string 
@@ -7,8 +7,6 @@ export interface Params{
     start_date?:  string 
     end_date?:  string 
 }
-
-
 
 interface ExtractContextProps {
   params: Params | null;
@@ -19,3 +17,4 @@ export const ExtractContext = React.createContext<ExtractContextProps>({
   params:null,
   setParams: () => {},
 });
+

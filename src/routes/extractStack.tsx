@@ -4,6 +4,7 @@ import ExtractScreen from '../pages/extract/main_page';
 import FilterScreen from '../pages/extract/filters';
 import {ExtractContext, Params} from '../context/ExtractContext';
 import { useState } from 'react';
+import Payment from '../components/payment';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +24,7 @@ export default function ExtractStack() {
         <Stack.Screen 
           name="Filter" 
           component={FilterScreen}
-        />
+        />        
       </Stack.Navigator>
     </ExtractContext.Provider>
   );

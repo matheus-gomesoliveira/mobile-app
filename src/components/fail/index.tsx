@@ -17,7 +17,8 @@ interface ModalProps {
   children?: ReactNode;
   setIsVisible: React.Dispatch<SetStateAction<boolean>>;
 }
-const ErrorModal: React.FC<ModalProps> = (props) => {
+
+const ErrorModal: React.FC<ModalProps> = props => {
   const handleCloseModal = () => {
     props.setIsVisible(false);
   };
@@ -28,7 +29,6 @@ const ErrorModal: React.FC<ModalProps> = (props) => {
 
   return (
     <Modal transparent visible={true}>
-
       <Container>
         <ModalContent>
           <Button onPress={handleCloseModal}>
@@ -47,14 +47,14 @@ const ErrorModal: React.FC<ModalProps> = (props) => {
             <Title>{props.ModalTitle}</Title>
             <Subtitle
               style={{
-                textAlign:'center'
-              }}
-            >{props.ModalSubtitle}</Subtitle>
+                textAlign: 'center',
+              }}>
+              {props.ModalSubtitle}
+            </Subtitle>
             {props.children}
           </ModalBox>
         </ModalContent>
       </Container>
-
     </Modal>
   );
 };

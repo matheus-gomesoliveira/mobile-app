@@ -55,6 +55,14 @@ export const SmallInput = styled(TextInput)`
     border-bottom-width:1px ;
 `
 
+export const Content = styled(View)`
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0 36px;
+    background-color: #FFFFFFFF;
+`
+
 export const NoMaskInput = styled(TextInput)`
     width: 100%;
     border-bottom-width:1px ;

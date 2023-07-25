@@ -6,13 +6,14 @@ import ExtractAll from '../all';
 import ExtractIn from '../In';
 import ExtractOut from '../out';
 import { UserContext } from '../../../context/AppContext';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 const ExtractScreen = () => {
   const navigation = useNavigation()
   const Tab = createMaterialTopTabNavigator()
   const { userData, setUserData } = useContext(UserContext);
   const {usuario, conta, endereco} = userData
+
   function formattedBalance(valor: string | undefined) {
     const formatter = new Intl.NumberFormat('pt-BR', {
       minimumFractionDigits: 2,
@@ -38,7 +39,7 @@ const ExtractScreen = () => {
           <Image source={require('../../../../assets/left-arrow.png')} />
         </TouchableOpacity>
         <Title>Extrato</Title>
-        <TouchableOpacity onPress={() => navigation.navigate('Filter')}>
+        <TouchableOpacity onPress={()=>navigation.navigate('Filter')}>
             <Image source={require('../../../../assets/filter.png')} />
         </TouchableOpacity>
       </Header>

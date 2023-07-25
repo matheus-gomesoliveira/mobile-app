@@ -23,6 +23,7 @@ import {
 import ErrorModal from '../../components/fail';
 import {UserLogin} from '../../api/UserApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import analytics from "@react-native-firebase/analytics"
 
 const Login = () => {
   const [cpf, setCpf] = useState('');
@@ -48,7 +49,7 @@ const Login = () => {
       cpf: cpf.replace(/[^\w\s]/gi, ''),
       senha: password,
     })
-      .then((res: any) => {
+      .then(async (res: any) => {
         if (res.status == 201) {
           AsyncStorage.setItem('AccessToken', res.data.token);
           navigation.reset({
@@ -59,6 +60,9 @@ const Login = () => {
               },
             ],
           });
+        await analytics().logEvent('Login', {
+          id:res.data.id
+        })
         }
         if (res.status != 201) {
           handleOpenModal();
@@ -165,7 +169,7 @@ const Login = () => {
           </Button>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate('Onboarding')}>
+            onPress={async () => {await analytics().logEvent('Onboarding_Try'), navigation.navigate('Onboarding') }}>
             <RegularLinkText>Não tem uma conta? Cadastre-se!</RegularLinkText>
           </TouchableOpacity>
         </ButtonWrapper>

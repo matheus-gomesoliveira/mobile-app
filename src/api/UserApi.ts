@@ -118,10 +118,17 @@ interface data{
   }
 }
 
+interface OnboardingRes{
+  status?:string,
+  id?:number,
+  message:string
+  error?:string
+}
+
 export const Onboarding = async (data:data) =>{
   try {
     const token = await AsyncStorage.getItem('AccessToken')
-    const res:AxiosResponse = await apiManager("/register",{
+    const res:AxiosResponse<OnboardingRes> = await apiManager("/register",{
       method:'POST',
       headers:{
         Authorization:`Bearer ${token}`

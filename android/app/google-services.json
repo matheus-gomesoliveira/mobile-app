@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "50360782777",
+    "project_id": "rubbankapp-b1fd4",
+    "storage_bucket": "rubbankapp-b1fd4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50360782777:android:cb014523ec7d3732443068",
+        "android_client_info": {
+          "package_name": "com.rubbank"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50360782777-rnem0ujqkkdljea1kfdlu5mf7nqmpbhk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAc6hrplIc4vq1OkSPuSLbvAnx3hTw3xI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50360782777-rnem0ujqkkdljea1kfdlu5mf7nqmpbhk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,7 +5,7 @@ export const Content = styled(View)`
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
-    padding: 0 36px;
+    padding: 10px 36px 0;
     background-color: #FFFFFFFF;
 `
 
@@ -39,12 +39,12 @@ export const Black = styled(Text)`
 export const TextWrap = styled(View)`
     flex-direction: column;
     padding: 10px 16px;
-    width: 70%;
 `
 
 export const Wrap = styled(View)`
     flex-direction: row;
     align-items: center;
+    width: 50%;
 `
 export const Piggy = styled(View)`
     padding-top:70% ;

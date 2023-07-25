@@ -10,6 +10,7 @@ import {
   TextWrapper,
 } from './styles';
 import {useNavigation} from '@react-navigation/native';
+import analytics from "@react-native-firebase/analytics"
 
 const Welcome = () => {
   const navigation = useNavigation();
@@ -29,7 +30,6 @@ const Welcome = () => {
           <BoldText>Bem-vindo ao RubBank!</BoldText>
           <RegularText>Sua conta digital, sem burocracia.</RegularText>
         </TextWrapper>
-
         <Button onPress={() => navigation.navigate('Login')}>
           <TextButton>COMEÇAR</TextButton>
         </Button>

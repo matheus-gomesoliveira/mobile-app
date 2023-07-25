@@ -154,6 +154,7 @@ const UserScreen = () => {
       setIsName(false);
     }
   };
+  
 
   const navigation = useNavigation();
 

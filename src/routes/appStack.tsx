@@ -12,6 +12,8 @@ import TransactionAlt from '../pages/transaction-alt';
 import ExtractScreen from '../pages/extract/main_page';
 import FilterScreen from '../pages/extract/filters';
 import ExtractStack from './extractStack';
+import TransferScreen from '../pages/transaction';
+import TransferStack from './transferStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -57,9 +59,13 @@ export default function AppStack() {
           name="TransactionAlt"
           component={TransactionAlt}
         />
-        <Stack.Screen
-          name="ExtractStack"
+        <Stack.Screen 
+          name="ExtractStack" 
           component={ExtractStack}
+        />
+        <Stack.Screen 
+          name="TransferStack" 
+          component={TransferStack}
         />
       </Stack.Navigator>
     </UserContext.Provider>

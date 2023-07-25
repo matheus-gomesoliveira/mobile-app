@@ -20,6 +20,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import { Account, Address, User, UserContext, UserData } from '../../context/AppContext';
 import { GetUserData } from '../../api/UserApi';
+import analytics from "@react-native-firebase/analytics"
+
 
 const Dahsboard = () => {
   const navigation = useNavigation();
@@ -59,7 +61,6 @@ const Dahsboard = () => {
   const getUser = async ()=>{
     try {
       const res = await GetUserData()
-      console.log((res?.data))
       const jsonString = JSON.stringify(res?.data)
       const { usuario, endereco, conta } = JSON.parse(jsonString);
         
@@ -69,14 +70,15 @@ const Dahsboard = () => {
         conta: conta as Account,
       };
       setUserData(updatedUserData);
+
     } catch (e) {
       console.log(e)
     }
-
   }
 
   useEffect(() => {
-    getUser();
+    getUser()
+    console.log(userData.conta?.saldo);
   }, [userData.conta?.saldo]);
 
   return (
@@ -136,7 +138,7 @@ const Dahsboard = () => {
       </MainSection>
       <FeaturesSection>
         <Features>
-          <FeatureBox>
+          <FeatureBox onPress={()=>navigation.navigate('TransferStack')}>
             <Image source={require('../../../assets/transfer.png')} />
             <BoxText>Transferir</BoxText>
           </FeatureBox>

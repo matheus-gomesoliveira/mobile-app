@@ -23,6 +23,7 @@ import {useContext, useEffect, useState} from 'react';
 import Success from '../../../components/success';
 import {Account, OnboardingContext} from '../../../context/OnboardingContext';
 import { Onboarding } from '../../../api/UserApi';
+import analytics from "@react-native-firebase/analytics"
 
 const TransactionPasswordScreen = () => {
   const navigation = useNavigation();
@@ -42,6 +43,64 @@ const TransactionPasswordScreen = () => {
   const passwordValidation = regexSenhaTransacional.test(password);
   const passMatch: boolean = password == confirm;
 
+  function calculateAge(birthDate:string) {
+    const today = new Date();
+    const timezone = today.getTimezoneOffset() * 60000;
+    const todayConverted = new Date(today.getTime() - timezone);
+    const birthDateObj = new Date(birthDate);
+  
+    let age = todayConverted.getFullYear() - birthDateObj.getFullYear();
+    let months = todayConverted.getMonth() - birthDateObj.getMonth();
+  
+    if (months < 0 || (months === 0 && today.getDate() < birthDateObj.getDate())) {
+      age--;
+      months += 12;
+    }
+    console.log({
+      years:age,
+      months:months
+    })
+    return { years: age, months: months };
+  }
+
+  function setRegion(state:string | undefined){
+    if(state){
+      const regions: { [key: string]: string } = {
+        "AC": "Norte",
+        "AL": "Nordeste",
+        "AP": "Norte",
+        "AM": "Norte",
+        "BA": "Nordeste",
+        "CE": "Nordeste",
+        "DF": "Centro-Oeste",
+        "ES": "Sudeste",
+        "GO": "Centro-Oeste",
+        "MA": "Nordeste",
+        "MT": "Centro-Oeste",
+        "MS": "Centro-Oeste",
+        "MG": "Sudeste",
+        "PA": "Norte",
+        "PB": "Nordeste",
+        "PR": "Sul",
+        "PE": "Nordeste",
+        "PI": "Nordeste",
+        "RJ": "Sudeste",
+        "RN": "Nordeste",
+        "RS": "Sul",
+        "RO": "Norte",
+        "RR": "Norte",
+        "SC": "Sul",
+        "SP": "Sudeste",
+        "SE": "Nordeste",
+        "TO": "Norte"
+      };
+    
+      const region = regions[state];
+      return region
+    }
+   
+  }
+  
   const handleOpenSuccess = () => {
     setSuccess(true);
   };
@@ -93,7 +152,14 @@ const TransactionPasswordScreen = () => {
         })
         if(res?.status == 201){
           handleOpenSuccess();
-          console.log(onboardingData);
+          if(usuario){
+          await analytics().logEvent('Onboarding_Success',{
+            id:res.data.id,
+            state:endereco?.uf,
+            city:endereco?.cidade,
+            region: setRegion(endereco?.uf),
+            age:calculateAge(usuario?.data_nascimento).years
+          })}
         }
         else
           console.log('e')
@@ -102,7 +168,7 @@ const TransactionPasswordScreen = () => {
         setPassword('')
         setConfirm('')
       }
-    }
+    } 
   };
 
 

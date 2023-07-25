@@ -94,7 +94,7 @@ export const ButtonView = styled(View)`
 `
 
 export const ButtonText = styled(Text)`
-    color: rgba(56, 56, 56, 1);
+    color: rgba(100, 100, 100, 1 );
     font-size: 16px;
     font-weight: 500;
 `
