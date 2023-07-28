@@ -44,7 +44,7 @@ const TransactionAlt = () => {
 
   const changePassword = async () => {
       if(passMatch){
-          const res: any = await changeTransactionPassword({
+          const res:any = await changeTransactionPassword({
           password:password,
           newPassword:newPassword,
           confirm:confirmNewPassword

@@ -109,3 +109,14 @@ export const InputLabelSmallBox = styled(View)`
 export const InputLabel = styled(View)`
     padding-top: 20px;
 `
+export const SmallText = styled(Text)`
+    font-size: 12px;
+    font-weight: 400;
+    color: #f70d1a;
+`
+
+export const Error = styled(View)`
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 1px;
+`

@@ -53,6 +53,8 @@ const ExtractAll = () => {
 
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
+  const [idComprovante, setIdComprovante] = useState('')
+
   function formattedValue(valor: string | undefined) {
     const formatter = new Intl.NumberFormat('pt-BR', {
       minimumFractionDigits: 2,

@@ -31,15 +31,15 @@ export const DescInput = styled(TextInput)`
     border-bottom-width: 1px;
 `
 
-export const AmountInput = styled(TextInput)`
+export const AmountInput = styled(TextInputMask)`
     height: 80px;
-    margin-bottom: 40px;
     border-bottom-width: 1px;
     font-size: 28px;
 `
 
 export const ButtonView = styled(View)`
     box-sizing: border-box;
+    margin-bottom: 40px;
     padding: 20px 0;
 `
 
@@ -59,4 +59,15 @@ export const ButtonTitle = styled(Text)`
     font-size: 16px;
     font-weight: 500;
     color: #FFFFFF;
+`
+export const ErrorText = styled(Text)`
+    font-size: 12px;
+    font-weight: 400;
+    color: #f70d1a;
+`
+
+export const Error = styled(View)`
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 1px;
 `

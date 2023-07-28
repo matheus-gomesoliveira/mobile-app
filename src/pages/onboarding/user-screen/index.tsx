@@ -109,49 +109,55 @@ const UserScreen = () => {
   };
 
   const handleConfirm = async () => {
-    if (nameValidation) {
-      setIsName(true);
-      if (emailValidation) {
-        setIsEmail(true);
-        if (phoneValidation) {
-          setIsPhone(true);
-          if (cpfValidation) {
-            setIsCpf(true);
-            const res: any = await validateOnboardingData({
-              cpf: cpf.replace(/[^\w]/g, ''),
-              email: email,
-              phone: phone.replace(/[^\w]/g, ''),
-            });
-            if (res?.status == 200) {
-              const newUser = {
-                nome_completo: name,
-                telefone: phone.replace(/[^\w]/g, ''),
-                email: email,
-                cpf: cpf.replace(/[^\w]/g, ''),
-                senha: '',
-                data_nascimento: formatBirthday(birth),
-              };
-              setOnboardingData(prevData => ({
-                ...prevData,
-                usuario: newUser,
-              }));
-              navigation.navigate('OnboardingCep');
-            }
-            if (res?.status != 200) {
-              handleOpenModal();
-              setErrorMessage(res.response.data.message);
-            }
-          } else {
-            setIsCpf(false);
-          }
-        } else {
-          setIsPhone(false);
-        }
-      } else {
-        setIsEmail(false);
-      }
-    } else {
-      setIsName(false);
+    if (!nameValidation) {
+      setIsName(false)
+    } else{
+      setIsName(true)
+    }
+
+    if (!emailValidation) {
+      setIsEmail(false)
+    } else{
+      setIsEmail(true)
+    }
+
+    if (!phoneValidation) {
+      setIsPhone(false)
+    } else{
+      setIsPhone(true)
+    }
+
+    if (!cpfValidation) {
+      setIsCpf(false)
+    } else{
+      setIsPhone(true)
+    }
+
+    if(nameValidation && cpfValidation && phoneValidation && emailValidation){
+      const res: any = await validateOnboardingData({
+      cpf: cpf.replace(/[^\w]/g, ''),
+      email: email,
+      phone: phone.replace(/[^\w]/g, ''),
+    });
+    if (res?.status == 200) {
+      const newUser = {
+        nome_completo: name,
+        telefone: phone.replace(/[^\w]/g, ''),
+        email: email,
+        cpf: cpf.replace(/[^\w]/g, ''),
+        senha: '',
+        data_nascimento: formatBirthday(birth),
+      };
+      setOnboardingData(prevData => ({
+        ...prevData,
+        usuario: newUser,
+      }));
+      navigation.navigate('OnboardingCep');
+    }
+    if (res?.status != 200) {
+      handleOpenModal();
+      setErrorMessage(res.response.data.message);
+    }
     }
   };
   

@@ -1,4 +1,9 @@
-import {Image, ScrollView, TouchableOpacity} from 'react-native';
+import {
+  ActivityIndicator,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import {
   Container,
   WhiteBoard,
@@ -18,6 +23,8 @@ import {
   ButtonView,
   Button,
   ButtonTitle,
+  Error,
+  SmallText
 } from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {useContext, useState} from 'react';
@@ -32,7 +39,7 @@ import {
 import ViaCep from '../../api/ViaCep';
 import {changeAdressData, GetUserData} from '../../api/UserApi';
 import ErrorModal from '../../components/fail';
-import { AxiosError } from 'axios';
+import {AxiosError} from 'axios';
 
 const AddressAlt = () => {
   const navigation = useNavigation();
@@ -53,7 +60,14 @@ const AddressAlt = () => {
 
   const [errorMessage, setErrorMessage] = useState('');
 
-  const isNotClickable = !cep || !rua || !numero || !bairro || !cidade || !UF;
+  const [loading, setLoading] = useState(false);
+
+  const isNotClickable =
+    !cep || !rua || !numero || !bairro || !cidade || !UF || loading;
+
+  const isValidNumber = /^\d+[a-zA-Z]*$/;
+
+  const residencialNumberValid = isValidNumber.test(numero ? numero : '');
 
   const setDataByCep = async () => {
     try {
@@ -95,6 +109,7 @@ const AddressAlt = () => {
 
   const handleAlteration = async () => {
     try {
+      setLoading(true);
       await changeAdressData({
         cep: formattedCep,
         rua: rua,
@@ -106,10 +121,12 @@ const AddressAlt = () => {
       });
       setSuccess(true);
       await getUser();
-    } catch (e:any) {
+    } catch (e: any) {
       setModalIsVisible(true);
       setErrorMessage(e.toString());
       console.log(e);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -186,6 +203,10 @@ const AddressAlt = () => {
                     value={numero}
                     onChangeText={setNumero}
                   />
+                  {!residencialNumberValid &&
+                  (<Error>
+                    <SmallText>Insira um número residencial válido</SmallText>
+                  </Error>)}
                 </InputLabel>
               </InputLabelBox>
               <InputLabelBox>
@@ -210,10 +231,7 @@ const AddressAlt = () => {
                 keyboardType="default"
                 editable={editable}
                 value={bairro}
-                onChangeText={setBairro}
-              >
-
-                </NoMaskInput>
+                onChangeText={setBairro}></NoMaskInput>
             </InputLabel>
             <SameLineInputs>
               <InputLabelBigBox>
@@ -243,11 +261,13 @@ const AddressAlt = () => {
           <ButtonView>
             <Button
               onPress={handleAlteration}
-              disabled={isNotClickable}
+              disabled={isNotClickable || loading || !residencialNumberValid}
               style={{
-                opacity: isNotClickable ? 0.4 : 1,
+                opacity: isNotClickable || loading || !residencialNumberValid ? 0.4 : 1,
               }}>
-              <ButtonTitle>CONFIRMAR</ButtonTitle>
+              <ButtonTitle>
+                {loading ? <ActivityIndicator /> : 'CONFIRMAR'}
+              </ButtonTitle>
             </Button>
           </ButtonView>
         </WhiteBoard>

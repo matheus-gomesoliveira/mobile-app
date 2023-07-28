@@ -32,7 +32,6 @@ const Dahsboard = () => {
 
   const [balanceIsVisible, setBalanceIsVIsible] = useState(false);
 
-
   const handleBalanceIsVisible = ()=>{
     setBalanceIsVIsible(!balanceIsVisible);
   }

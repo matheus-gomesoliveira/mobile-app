@@ -155,10 +155,6 @@ const Login = () => {
                   </TouchableOpacity>
                 </LabelIsVisible>
               </LabelPlaceholderWrapper>
-
-              <TouchableOpacity>
-                <RegularLinkText>Esqueceu a sua senha?</RegularLinkText>
-              </TouchableOpacity>
             </InputsWrapper>
           </TitleInputWrapper>
         </Wrapper>

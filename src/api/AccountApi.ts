@@ -25,6 +25,7 @@ interface changeTransactional {
   confirm: string | undefined;
 }
 
+
 export const changeTransactionPassword = async (data: changeTransactional) => {
   try {
     const token = await AsyncStorage.getItem('AccessToken');
